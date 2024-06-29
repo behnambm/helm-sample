@@ -3,12 +3,12 @@ entries:
   iac-sample:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2024-06-29T12:04:57.587160503+03:30"
+    created: "2024-06-29T12:11:43.178005725+03:30"
     description: Helm chart for my docker sample application deployed on k8s
-    digest: 5e7296fe3c2650821fc061554740db3a5c66ba1f707c68e5aa8ef1ccb14c0f10
+    digest: 8eecee3214ae42a366706a7989253b05597b36bdefec799e83521f75d7605748
     name: iac-sample
     type: application
     urls:
     - iac-sample-0.1.0.tgz
     version: 0.1.0
-generated: "2024-06-29T12:04:57.586795837+03:30"
+generated: "2024-06-29T12:11:43.177684113+03:30"
