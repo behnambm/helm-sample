@@ -1,0 +1,37 @@
+namespace: default
+
+webapp:
+  appName: webapp
+  deployment:
+    replicas: 3
+    image:
+      name: behnambm/docker-sample
+      tag: v1
+  service:
+    port: 80
+
+db:
+  appName: db
+  deployment:
+    image:
+      name: mysql
+      tag: 8
+    volume:
+      pvc:
+        name: db-pvc
+  secret:
+    name: db-secret
+
+cache:
+  appName: cache
+  deployment:
+    image:
+      name: redis
+      tag: 7
+
+configmap:
+  name: webapp-config
+
+volume:
+  name: db-pv
+  path: /tmp/k8s-db-pv

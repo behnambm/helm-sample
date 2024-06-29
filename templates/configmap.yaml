@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.configmap.name }}
+  namespace: {{ .Values.namespace }}
+data:
+  MYSQL_HOST: "db-svc"
+  MYSQL_USER: "root"
+  MYSQL_DATABASE: "sample_db"
+  REDIS_HOST: "cache-svc"
+  REDIS_PORT: "6379"
+  REDIS_DB: "0"
+

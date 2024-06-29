@@ -1,0 +1,100 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.webapp.appName }}-deployment
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.webapp.appName }}
+spec:
+  replicas: {{ .Values.webapp.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.webapp.appName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.webapp.appName }}
+    spec:
+      containers:
+        - name: {{ .Values.webapp.appName }}
+          image: {{ .Values.webapp.deployment.image.name }}:{{ .Values.webapp.deployment.image.tag }}
+          ports:
+            - containerPort: 5000
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.configmap.name }}
+          env:
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.db.secret.name }}
+                  key: db-password
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.db.appName }}-deployment
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.db.appName }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.db.appName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.db.appName }}
+    spec:
+      volumes:
+        - name: db-vol
+          persistentVolumeClaim:
+            claimName: {{ .Values.db.deployment.volume.pvc.name }}
+      containers:
+        - name: {{ .Values.db.appName }}
+          image: {{ .Values.db.deployment.image.name }}:{{ .Values.db.deployment.image.tag }}
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.db.secret.name }}
+                  key: db-password
+            - name: MYSQL_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.configmap.name }}
+                  key: MYSQL_DATABASE
+
+          # volumeMounts:
+          #   - mountPath: /var/lib/mysql
+          #     name: db-vol
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.cache.appName }}-deployment
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.cache.appName }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.cache.appName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.cache.appName }}
+    spec:
+      containers:
+        - name: {{ .Values.cache.appName }}
+          image: {{ .Values.cache.deployment.image.name }}:{{ .Values.cache.deployment.image.tag }}
+          ports:
+            - containerPort: 6379
