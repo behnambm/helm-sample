@@ -3,12 +3,22 @@ entries:
   helm-sample:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2024-06-29T14:12:55.224555686+03:30"
+    created: "2024-06-29T17:23:59.660274054+03:30"
+    description: Helm chart for my docker sample application deployed on k8s - database with volume
+    digest: ae5b0ec30840fb90dcd1cd69b261c88d35c15c9057f17565282bf2b551eebd8f
+    name: helm-sample
+    type: application
+    urls:
+    - helm-sample-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2024-06-29T17:23:59.659809925+03:30"
     description: Helm chart for my docker sample application deployed on k8s
-    digest: 1177ab0af6e96385cc62cb97c624032e7c9ff74ec111123afea27b6ac7ba5b09
+    digest: 3b6749ba47d981023e1691ae73becc0afd2137aefbdaa2f1f1170989e8bf9f9b
     name: helm-sample
     type: application
     urls:
     - helm-sample-1.0.0.tgz
     version: 1.0.0
-generated: "2024-06-29T14:12:55.224073119+03:30"
+generated: "2024-06-29T17:23:59.65893563+03:30"

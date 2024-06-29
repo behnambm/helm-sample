@@ -1,9 +1,9 @@
 apiVersion: v2
 name: helm-sample
-description: Helm chart for my docker sample application deployed on k8s
+description: Helm chart for my docker sample application deployed on k8s - database with volume
 
 type: application
 
-version: 1.0.0
+version: 1.0.1
 
 appVersion: "1.0.0"
