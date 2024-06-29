@@ -70,9 +70,9 @@ spec:
                   name: {{ .Values.configmap.name }}
                   key: MYSQL_DATABASE
 
-          # volumeMounts:
-          #   - mountPath: /var/lib/mysql
-          #     name: db-vol
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: db-vol
 
 ---
 
